@@ -1,0 +1,15 @@
+# framework dependencies
+django
+django-seed
+djangorestframework
+djangorestframework-api-key
+django-cors-headers
+
+
+# python dependencies
+pyyaml
+requests
+python-dotenv
+psycopg2-binary
+
+djangorestframework-simplejwt

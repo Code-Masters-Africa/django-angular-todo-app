@@ -1,0 +1,82 @@
+<header class="container">
+  <h3>Shawal's To Do list</h3>
+</header>
+
+<div id="overall_container">
+
+
+
+  <div id="todo_form" class="container">
+    <h3 class="form_title">Create new Todo</h3>
+    <form (ngSubmit)="onSubmit(todo_form)" #todo_form="ngForm">
+
+      <label for="title">ToDo</label><input type="text" placeholder="Enter To Do title"  class="input_fw"
+        name="title" id="title" ngModel required>
+
+      <label for="todo_desc">Description</label><input
+        type="text"
+        placeholder="Describe the ToDo (optional)"
+        class="input_fw"
+        name="todo_desc"
+        id="todo_desc" ngModel>
+
+      <button type="button" class="form_btn" (click)="onSubmit(todo_form)">Create To Do</button>
+
+    </form>
+  </div>
+
+  <div id="todo_viewer" class="container">
+    <h3 class="todo_viewer">Todo tasks: {{uncomplete_todos}}</h3>
+
+    <div class="wrapper" *ngIf="todos?.length">
+      Progress: {{percentage}} %
+      <div class="progress-bar">
+        <span class="progress-bar-fill" [style.width.%]="percentage"> {{percentage}}%</span>
+      </div>
+    </div>
+
+    <div class="todo_list" *ngFor="let todo of todos">
+
+      <div class="todo_card" *ngIf="!this.todo.isComplete">
+        <h3> {{this.todo.title}} </h3>
+        <p> {{this.todo.desc}} </p>
+        <button id="delete_btn" (click)="onDelete(this.todo.id)">Delete</button>
+        <button class="form_btn" (click)="onComplete(this.todo.id)">Completed</button>
+      </div>
+
+    </div>
+
+    <div *ngIf="!todos?.length" class="msg container">
+      To do list is empty
+    </div>
+
+    <hr><br>
+    <h3 id="completed-tasks" *ngIf="todos?.length">Completed Tasks {{complete_todos}}</h3>
+    <hr>
+
+    <div class="todo-list" *ngFor="let todo of todos">
+      <div class="todo_card" *ngIf="this.todo.isComplete">
+        <h3> {{this.todo.title}} </h3>
+        <p> {{this.todo.desc}} </p>
+        <button id="delete_btn" (click)="onDelete(this.todo.id)">Delete</button>
+        <button class="form_btn" (click)="unComplete(this.todo.id)">Not Completed</button>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<footer class=" container">
+  <h3>Footer</h3>
+</footer>
+
+
+
+
+<section class="container">
+  <app-test-api></app-test-api>
+</section>
+
+<router-outlet></router-outlet>
